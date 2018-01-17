@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui" dir="ltr" xml:lang="ar" lang="ar">
+    <h:head>
+        <title>Edit Manger page</title>
+    </h:head>
+    <h:body style="background-color: #ddd;font-size: large; font-family:Traditional Arabic, Geeza Pro,adobe arabic;direction:rtl;text-align: right;">                    
+              <h3 style=" text-decoration:none;font-size: 36px ;background-color: #ddd;color: red;margin-top: 0px;margin-bottom: 1px;text-align: center">الجمهورية العربية السورية وزارة الادارة المحلية</h3>
+            
+                <td><h:outputLink  style=" text-decoration:none;font-size:30px ;background-color: #ddd;color: red;margin-top: 1px;font-weight: bold;margin-left: 2em;" value="#">     مركز خدمة المواطن  الموظف: #{loginManagedBean.login.username}     </h:outputLink></td>
+                
+           
+        <h:form id="formView">
+
+            <p:dataTable scrollRows="10" scrollable="true" scrollHeight="270" lazy="true" rows="30" id ="personDataTable" value="#{webServicecitizenClient.citizenList}" var="citizen">
+
+                <p:column headerText="الرقم" style="background-color: red;">
+
+                    <h:outputText value="#{citizen.id}" ></h:outputText>
+
+                </p:column>
+
+                <p:column headerText="الاسم" style="background-color: dodgerblue;">
+                    <h:inputText value="#{citizen.name}" size="5" rendered="#{citizen.editable}" />
+                    <h:outputText value="#{citizen.name}"  rendered="#{not citizen.editable}"></h:outputText>
+
+                </p:column>
+
+              
+
+                <p:column headerText="اسم الاب" style="background-color: #FF9000;">
+                    <h:inputText value="#{citizen.fname}" size="5" rendered="#{citizen.editable}" />
+                    <h:outputText value="#{citizen.fname}" rendered="#{not citizen.editable}"></h:outputText>
+
+                </p:column>
+                <p:column headerText="اسم الام" style="background-color: dodgerblue;">
+                    <h:inputText value="#{citizen.mname}" size="5" rendered="#{citizen.editable}" />
+                    <h:outputText value="#{citizen.mname}"  rendered="#{not citizen.editable}"></h:outputText>
+
+                </p:column>
+                 <p:column headerText="الكنية" style="background-color: #FF9000;">
+                    <h:inputText value="#{citizen.nname}" size="5" rendered="#{citizen.editable}" />
+                    <h:outputText value="#{citizen.nname}"  rendered="#{not citizen.editable}"></h:outputText>
+
+                </p:column>
+                <p:column headerText="الوضع العائلي" style="background-color: dodgerblue;">
+                    <h:inputText value="#{citizen.mstatus}" size="5" rendered="#{citizen.editable}" />
+                    <h:outputText value="#{citizen.mstatus}"  rendered="#{not citizen.editable}"></h:outputText>
+                </p:column>
+
+                <p:column headerText="محل ورقم القيد" style="background-color: #FF9000;">
+                    <h:inputText value="#{citizen.num_reg}" size="5" rendered="#{citizen.editable}" />
+                    <h:outputText value="#{citizen.num_reg}"  rendered="#{not citizen.editable}"></h:outputText>
+
+                </p:column>
+                <p:column headerText="الرقم الوطني:" style="background-color: dodgerblue;">
+                    <h:inputText value="#{citizen.num_id}" size="5" rendered="#{citizen.editable}" />
+                    <h:outputText value="#{citizen.num_id}"  rendered="#{not citizen.editable}"></h:outputText>
+
+                </p:column>
+                 <p:column headerText="الجنس" style="background-color: #FF9000;">
+                    <h:inputText value="#{citizen.sex}" size="5" rendered="#{citizen.editable}" />
+                    <h:outputText value="#{citizen.sex}"  rendered="#{not citizen.editable}"></h:outputText>
+
+                </p:column>
+            
+                <p:column>
+
+                    <f:facet name="header" >المهمة</f:facet>
+
+                    <p:commandButton value="إخراج قيد" style="background-color: pink" action="#" update="personDataTable"></p:commandButton>
+
+                </p:column>
+
+
+            </p:dataTable>
+
+             <div style="direction:rtl;text-align: right;width: 350;float: right;">
+                 <p:growl id="messages" showDetail="true"/>
+                 <p:panel header="بحث ضمن شؤون المواطن" style="width: 500px;background-color: pink"> 
+            <p:panelGrid columns="2" >
+
+                  <h:outputLabel for="name" value="الاسم: " />
+                  <p:inputText  value="#{webServicecitizenClient.searchcitizen.name}"/>
+                     <h:outputLabel for="name" value="اسم الاب " />
+                     <p:inputText  value="#{webServicecitizenClient.searchcitizen.fname}"/>
+                     <h:outputLabel for="name" value="تسم الام" />
+                     <p:inputText  value="#{webServicecitizenClient.searchcitizen.mname}"/>
+                     <h:outputLabel for="name" value="الكنية " />
+                     <p:inputText  value="#{webServicecitizenClient.searchcitizen.nname}"/>
+                    
+                     <h:outputLabel for="name" value="الرقم الوطني" />
+                     <p:inputText  value="#{webServicecitizenClient.searchcitizen.num_id}"/>
+                     <h:outputLabel for="name" value="محل ورقم القيد " />
+                     <p:inputText  value="#{webServicecitizenClient.searchcitizen.num_reg}"/>
+                    
+                </p:panelGrid>
+                
+            
+
+            <p><p:commandButton value="بحث" style="background-color: pink" action="#{webServicecitizenClient.search1()}" update="personDataTable"></p:commandButton></p>
+         </p:panel>
+          </div>
+                  <td ><h:outputLink style="text-decoration:none;font-size: 30px ;background-color: #ddd;font-style: oblique;font-weight: bold;color: red;margin-top: 1px;margin-left: 2em;" value="Edit_Criminal_security_EM.xhtml">الانتقال لصفحة الامن الجنائي  </h:outputLink></td>
+        </h:form>
+    </h:body>
+</html>
+

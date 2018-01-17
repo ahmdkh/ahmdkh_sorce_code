@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui" dir="ltr" xml:lang="ar" lang="ar">
+    <h:head>
+        <title> edit page</title>
+    </h:head>
+    <h:body style="background-color: #ddd;font-size: large; font-family:Traditional Arabic, Geeza Pro,adobe arabic;direction:rtl;text-align: right;">
+        
+
+              <h3 style=" text-decoration:none;font-size: 36px ;background-color: #ddd;color: black;margin-top: 0px;margin-bottom: 1px;text-align: center">الجمهورية العربية السورية وزارة الادارة المحلية</h3>
+            
+                <td><h:outputLink  style=" text-decoration:none;font-size: 30px ;background-color: #ddd;color: black;margin-top: 1px;font-weight: bold;margin-left: 2em;" value="#">     مركز خدمة المواطن  الموظف: #{loginManagedBean.login.username}     </h:outputLink></td>
+                
+
+        <h:form id="formView">
+
+            <p:dataTable id ="personDataTable" value="#{webServicecsClient.csList}" var="cs">
+
+                <p:column headerText="الرقم"   style="background-color: pink;">
+                     
+                    <h:outputText  value="#{cs.id}" ></h:outputText>
+
+                </p:column>
+
+                <p:column headerText="الاسم" style="background-color: pink;">
+                    <h:inputText value="#{cs.name}" size="5" rendered="#{cs.editable}" />
+                    <h:outputText  value="#{cs.name}"  rendered="#{not cs.editable}"></h:outputText>
+
+                </p:column>
+                
+                <p:column headerText="اسم الاب" style="background-color: pink;">
+                    <h:inputText value="#{cs.fname}" size="5" rendered="#{cs.editable}" />
+                    <h:outputText value="#{cs.fname}" rendered="#{not cs.editable}"></h:outputText>
+                </p:column>
+                
+                <p:column headerText="اسم الام" style="background-color: pink;">
+                    <h:inputText value="#{cs.mname}" size="5" rendered="#{cs.editable}" />
+                    <h:outputText value="#{cs.mname}"  rendered="#{not cs.editable}"></h:outputText>
+                </p:column>
+                
+                 <p:column headerText="الكنية" style="background-color: pink;">
+                    <h:inputText value="#{cs.nname}" size="5" rendered="#{cs.editable}" />
+                    <h:outputText value="#{cs.nname}"  rendered="#{not cs.editable}"></h:outputText>
+                </p:column>
+                
+                <p:column headerText="الجنسية" style="background-color: pink;">
+                    <h:inputText value="#{cs.nationality}" size="5" rendered="#{cs.editable}" />
+                    <h:outputText value="#{cs.nationality}"  rendered="#{not cs.editable}"></h:outputText>
+                </p:column>
+
+                <p:column headerText="مكان وتاريخ الولادة" style="background-color: pink;">
+                    <h:inputText value="#{cs.padob}" size="5" rendered="#{cs.editable}" />
+                    <h:outputText value="#{cs.padob}"  rendered="#{not cs.editable}"></h:outputText>
+                </p:column>
+                
+                 <p:column headerText="نوع الجرم" style="background-color: pink;">
+                    <h:inputText value="#{cs.toffense}" size="5" rendered="#{cs.editable}" />
+                    <h:outputText value="#{cs.toffense}"  rendered="#{not cs.editable}"></h:outputText>
+                </p:column>
+                
+             
+                <p:column >
+
+                    <f:facet name="header">العملية</f:facet>
+
+                    <p:commandButton value="منح ورقة غير محكوم" style="background-color: pink" action="#" update="personDataTable"></p:commandButton>
+
+                </p:column>
+
+
+            </p:dataTable>
+
+          <div style="direction:rtl;text-align: right;width: 350;">
+                 <p:growl id="messages" showDetail="true"/>
+                 <p:panel header="بحث ضمن امن الجنائي" style="width: 500px;background-color: pink"> 
+            <p:panelGrid columns="2" >
+
+                  <h:outputLabel for="name" value="الاسم " />
+                  <p:inputText  value="#{webServicecsClient.searchcs.name}"/>
+                     <h:outputLabel for="name" value="اسم الاب " />
+                    <p:inputText  value="#{webServicecsClient.searchcs.fname}"/>
+                     <h:outputLabel for="name" value="اسم الام " />
+                    <p:inputText  value="#{webServicecsClient.searchcs.mname}"/>
+                     <h:outputLabel for="name" value="الكنية " />
+                    <p:inputText  value="#{webServicecsClient.searchcs.nname}"/>              
+                     <h:outputLabel for="name" value="مكان وتاريخ الولادة " />
+                    <p:inputText  value="#{webServicecsClient.searchcs.padob}"/>
+                     
+                    
+                </p:panelGrid>
+                
+            
+
+            <p><p:commandButton value="بحث" style="background-color: pink" action="#{webServicecsClient.search1()}" update="personDataTable"></p:commandButton></p>
+              
+            </p:panel>
+          </div>
+                             <td ><h:outputLink style="font-size: 30px ;background-color: #ddd;font-style: oblique;font-weight: bold;color: black;margin-top: 1px;margin-left: 2em;" value="Edit_SHOONMOATEN_EM.xhtml">الانتقال لصفحة شؤن المواطن  </h:outputLink></td>
+        </h:form>
+    </h:body>
+</html>
+

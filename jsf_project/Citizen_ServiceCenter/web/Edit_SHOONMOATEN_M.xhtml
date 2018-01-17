@@ -1,0 +1,155 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui" dir="ltr" xml:lang="ar" lang="ar">
+    <h:head>
+        <title>Edit Manger page</title>
+    </h:head>
+    <h:body style="background-color: #ddd; font-family:Traditional Arabic, Geeza Pro,adobe arabic;direction:rtl;text-align: right;">
+  
+                 <h3 style=" text-decoration:none;font-size: 66px ;background-color: #ddd;color: red;margin-top: 0px;margin-bottom: 1px;text-align: center">الجمهورية العربية السورية وزارة الادارة المحلية</h3>
+            
+                <td><h:outputLink  style=" text-decoration:none;font-size: 30px ;background-color: #ddd;color: red;margin-top: 1px;font-weight: bold;margin-left: 2em;" value="#">     مركز خدمة المواطن  المدير: #{loginManagedBean.login.username}     </h:outputLink></td>
+                
+              
+               
+                                   
+        
+        <h:form id="formView">
+
+            <p:dataTable  scrollRows="20" scrollable="true" scrollHeight="300" lazy="true" rows="40" id ="personDataTable" value="#{webServicecitizenClient.citizenList}" var="citizen">
+
+                <p:column headerText="الرقم" style="background-color: red;">
+
+                    <h:outputText value="#{citizen.id}" ></h:outputText>
+
+                </p:column>
+
+                <p:column headerText="الاسم" style="background-color: pink;">
+                    <h:inputText value="#{citizen.name}" size="5" rendered="#{citizen.editable}" />
+                    <h:outputText value="#{citizen.name}"  rendered="#{not citizen.editable}"></h:outputText>
+
+                </p:column>
+
+              
+
+                <p:column headerText="اسم الاب" style="background-color: pink;">
+                    <h:inputText value="#{citizen.fname}" size="5" rendered="#{citizen.editable}" />
+                    <h:outputText value="#{citizen.fname}" rendered="#{not citizen.editable}"></h:outputText>
+
+                </p:column>
+                <p:column headerText="اسم الام" style="background-color: pink;">
+                    <h:inputText value="#{citizen.mname}" size="5" rendered="#{citizen.editable}" />
+                    <h:outputText value="#{citizen.mname}"  rendered="#{not citizen.editable}"></h:outputText>
+
+                </p:column>
+                 <p:column headerText="الكنية" style="background-color: pink;">
+                    <h:inputText value="#{citizen.nname}" size="5" rendered="#{citizen.editable}" />
+                    <h:outputText value="#{citizen.nname}"  rendered="#{not citizen.editable}"></h:outputText>
+
+                </p:column>
+                <p:column headerText="الوضع العائلي" style="background-color: pink;">
+                    <h:inputText value="#{citizen.mstatus}" size="5" rendered="#{citizen.editable}" />
+                    <h:outputText value="#{citizen.mstatus}"  rendered="#{not citizen.editable}"></h:outputText>
+                </p:column>
+
+                <p:column headerText="محل ورقم القيد" style="background-color: pink;">
+                    <h:inputText value="#{citizen.num_reg}" size="5" rendered="#{citizen.editable}" />
+                    <h:outputText value="#{citizen.num_reg}"  rendered="#{not citizen.editable}"></h:outputText>
+
+                </p:column>
+                <p:column headerText="الرقم الوطني" style="background-color: pink;">
+                    <h:inputText value="#{citizen.num_id}" size="5" rendered="#{citizen.editable}" />
+                    <h:outputText value="#{citizen.num_id}"  rendered="#{not citizen.editable}"></h:outputText>
+
+                </p:column>
+                 <p:column headerText="الجنس" style="background-color: pink;">
+                    <h:inputText value="#{citizen.sex}" size="5" rendered="#{citizen.editable}" />
+                    <h:outputText value="#{citizen.sex}"  rendered="#{not citizen.editable}"></h:outputText>
+
+                </p:column>
+                <p:column>
+
+                    <f:facet name="header">Action</f:facet>
+
+                    <h:commandLink value="تعديل البيانات" style="background-color : pink" action="#{webServicecitizenClient.editAction1(citizen)}" 
+                                   rendered="#{not citizen.editable}" />
+
+                </p:column>
+                <p:column>
+
+                    <f:facet name="header">العملية</f:facet>
+
+                    <p:commandButton value="حذف" style="background-color: pink" action="#{webServicecitizenClient.deletecitizenlist(citizen)}" update="personDataTable"></p:commandButton>
+
+                </p:column>
+
+
+            </p:dataTable>
+
+            <h:commandButton value="حفظ التعديلات" style="width: 200px;height: 50px ;background-color: pink;color: black;font-size: 26px ;margin-right: 15em;" action="#{webServicecitizenClient.saveAction()}" />
+            <br/>
+            <br/>
+            <div style="direction:rtl;text-align: right;width: 350;float: right;" >
+                <p:panel header="بحث" style="width: 500px;height:300px;background-color: pink"> 
+            <p:panelGrid columns="2" >
+
+                  <h:outputLabel for="name" value="الاسم " />
+                  <p:inputText  value="#{webServicecitizenClient.searchcitizen.name}"/>
+                     <h:outputLabel for="name" value="اسم الاب " />
+                     <p:inputText  value="#{webServicecitizenClient.searchcitizen.fname}"/>
+                     <h:outputLabel for="name" value="اسم الام " />
+                     <p:inputText  value="#{webServicecitizenClient.searchcitizen.mname}"/>
+                     <h:outputLabel for="name" value="الكنية " />
+                     <p:inputText  value="#{webServicecitizenClient.searchcitizen.nname}"/>
+                    
+                     <h:outputLabel for="name" value="الرقم الوطني " />
+                     <p:inputText  value="#{webServicecitizenClient.searchcitizen.num_id}"/>
+                     <h:outputLabel for="name" value="محل ورقم القيد " />
+                     <p:inputText  value="#{webServicecitizenClient.searchcitizen.num_reg}"/>
+                    
+                </p:panelGrid>
+                
+               </p:panel>
+
+            <p><p:commandButton value="بحث" style="background-color : pink;width: 350px" action="#{webServicecitizenClient.search1()}" update="personDataTable"></p:commandButton></p>
+            </div>            
+            <div style="direction:rtl;text-align: right;width: 350;float: right;">
+                  <p:growl id="messages" showDetail="true"/>
+            <p:panel header="اضافة مواطن" style="width: 500px;height: 450px;background-color: pink"> 
+                <p:panelGrid columns="2" style="background-color: peachpuff;">
+                    <h:outputLabel for="fname" value="الاسم " />
+                    <p:inputText  value="#{webServicecitizenClient.citizen.name}"/>
+                    <h:outputLabel for="lname" value="اسم الاب " />
+                    <p:inputText value="#{webServicecitizenClient.citizen.fname}"/>
+                    <h:outputLabel for="username" value="اسم الام " />
+                    <p:inputText  value="#{webServicecitizenClient.citizen.mname}"/>
+                    <h:outputLabel for="password" value="الكنية " />
+                    <p:inputText  value="#{webServicecitizenClient.citizen.nname}"/>
+                    <h:outputLabel for="rule" value="الوضع العائلي " />
+                    <h:selectOneRadio value="#{webServicecitizenClient.citizen.mstatus}">
+                	<f:selectItem itemValue="عازب" itemLabel="عازب" />
+                  	<f:selectItem itemValue="متزوج" itemLabel="متزوج" />   	
+                    </h:selectOneRadio>
+                    <h:outputLabel for="depart" value="الرقم الوطني " />
+                    <p:inputText  value="#{webServicecitizenClient.citizen.num_id}"/>
+                     <h:outputLabel for="depart" value="محل ورقم القيد " />
+                    <p:inputText  value="#{webServicecitizenClient.citizen.num_reg}"/>
+                     <h:outputLabel for="depart" value="الجنس" />
+                    <h:selectOneRadio value="#{webServicecitizenClient.citizen.sex}">
+                	<f:selectItem itemValue="انثى" itemLabel="انثى" />
+                  	<f:selectItem itemValue="ذكر" itemLabel="ذكر" />    	
+                    </h:selectOneRadio>              
+                    <f:facet name="footer">
+                        <p> <p:commandButton style="width: 400px;height: 40px;background-color: pink" value="اضافة مواطن" action="#{webServicecitizenClient.addcitizen()}" update="personDataTable"></p:commandButton></p>                         
+                    </f:facet>
+                </p:panelGrid>             
+            </p:panel>
+            </div>
+               <td ><h:outputLink style="font-size: 30px ;background-color: #ddd;font-style: oblique;font-weight: bold;float: right;color: black;margin-top: 1px;margin-left: 2em;" value="Edit_Criminal_security_M.xhtml">الانتقال لصفحة الامن الجنائي  </h:outputLink></td>
+        </h:form>
+    </h:body>
+</html>
+
