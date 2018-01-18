@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 11, 2017 2:18:57 PM by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+	<class name="com.model.entity.cs" table="CS">
+		<id name="id" type="int">
+			<column name="ID" />
+			<generator class="assigned" />
+		</id>
+		<property name="Name" type="java.lang.String">
+			<column name="NAME" />
+		</property>
+		<property name="Mname" type="java.lang.String">
+			<column name="MNAME" />
+		</property>
+		<property name="Fname" type="java.lang.String">
+			<column name="FNAME" />
+		</property>
+		<property name="Nname" type="java.lang.String">
+			<column name="NNAME" />
+		</property>
+		<property name="Padob" type="java.lang.String">
+			<column name="PADOB" />
+		</property>
+		<property name="Nationality" type="java.lang.String">
+			<column name="NATIONALITY" />
+		</property>
+		<property name="Toffense" type="java.lang.String">
+			<column name="TOFFENSE" />
+		</property>
+	</class>
+</hibernate-mapping>
